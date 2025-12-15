@@ -65,7 +65,7 @@ for i, feature in enumerate(DISPLAY_FEATURES):
             elif feature == "FBG":
                 val = st.number_input(f"{feature_name}", min_value=50.0, max_value=200.0, value=110.0, step=0.1) 
             elif feature == "HbA1c":
-                val = st.number_input(f"{feature_name}", min_value=3.0, max_value=20.0, value=5.0, step=0.1)
+                val = st.number_input(f"{feature_name}", min_value=3.0, max_value=20.0, value=6.0, step=0.1)
             elif feature == "HDL-C":
                 val = st.number_input(f"{feature_name}", min_value=30.0, max_value=200.0, value=70.0, step=0.1)
         input_data[feature] = val
@@ -126,6 +126,7 @@ if st.button("Predict CMM"):
 
 
 ## 打开终端win+R,再运行streamlit run "C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/prediction.py"##
+
 
 
 
