@@ -2,6 +2,7 @@ streamlit
 pandas
 numpy
 scikit-learn
+sksurv.ensemble
 xgboost
 lightgbm
 catboost
@@ -10,4 +11,5 @@ joblib
 shap
 missforest
 matplotlib
+
 
