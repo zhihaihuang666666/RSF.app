@@ -118,12 +118,13 @@ if st.button("Predict CMM"):
         
         # 设置y轴范围为0到1
         ax.set_ylim(0, 1)
-        st.pyplot(fig)
+        st.pyplot(fig,use_container_width=True)
         
     except Exception as e:
         st.error(f"预测过程出错: {str(e)}")
 
 
 ## 打开终端win+R,再运行streamlit run "C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/prediction.py"##
+
 
 
