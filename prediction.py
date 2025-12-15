@@ -7,10 +7,12 @@ import matplotlib.pyplot as plt
 
 ## ===================== 加载模型 =====================##
 #加载模型
-#model = joblib.load("C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/survrf_model.pkl")
 model = joblib.load("survrf_model.pkl")
-# 获取模型特征
-FEATURES = model.feature_names_in_
+# 获取模型特征（确保预测时使用正确的顺序）
+MODEL_FEATURES = list(model.feature_names_in_)
+
+# 自定义特征显示顺序（在这里调整顺序）
+DISPLAY_FEATURES = ["Age", "Gender", "Hypertension", "Memory problem", "Weight", "WC", "HDL-C", "FBG", "HbA1c"]
 
 # 特征配置
 CATEGORICAL_FEATURES = ["Hypertension", "Memory problem", "Gender"]
@@ -24,7 +26,6 @@ FEATURE_NAMES = {
     "HDL-C": "HDL-C(mg/dL)",
     "FBG": "FBG(mg/dL)",
     "HbA1c": "HbA1c(%)"
-
 }
 
 ## ===================== Streamlit 页面配置 =====================##
@@ -34,7 +35,7 @@ st.title("🫀 CMM Prediction Model")
 ## ===================== 用户输入界面 =====================##
 input_data = {} 
 col1, col2 = st.columns(2)
-for i, feature in enumerate(FEATURES):
+for i, feature in enumerate(DISPLAY_FEATURES):
     with col1 if i % 2 == 0 else col2:
         feature_name = FEATURE_NAMES.get(feature, feature)
         if feature in CATEGORICAL_FEATURES:
@@ -72,8 +73,8 @@ for i, feature in enumerate(FEATURES):
 ## ===================== 预测逻辑 =====================##
 if st.button("Predict CMM"):
     try:
-        # 准备输入数据
-        df_input = pd.DataFrame([input_data], columns=FEATURES)
+        # 准备输入数据 - 使用模型训练时的特征顺序
+        df_input = pd.DataFrame([input_data], columns=MODEL_FEATURES)
         
         # 处理分类特征
         for col in df_input.columns:
@@ -96,7 +97,7 @@ if st.button("Predict CMM"):
         
         # 显示累积发病率曲线
         st.subheader("📈 Time to incidence")
-        fig, ax = plt.subplots(figsize=(5, 4))
+        fig, ax = plt.subplots(figsize=(10, 8))
         
         # 计算累积发病率曲线：1 - 生存函数
         cumulative_incidence_curve = 1 - survival_function.y
@@ -118,13 +119,14 @@ if st.button("Predict CMM"):
         
         # 设置y轴范围为0到1
         ax.set_ylim(0, 1)
-        st.pyplot(fig, width="content")
+        st.pyplot(fig,width="content")
         
     except Exception as e:
         st.error(f"预测过程出错: {str(e)}")
 
 
 ## 打开终端win+R,再运行streamlit run "C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/prediction.py"##
+
 
 
 
