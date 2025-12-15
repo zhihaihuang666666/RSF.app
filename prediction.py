@@ -96,7 +96,7 @@ if st.button("Predict CMM"):
         
         # 显示累积发病率曲线
         st.subheader("📈 Time to incidence")
-        fig, ax = plt.subplots(figsize=(8, 5))
+        fig, ax = plt.subplots(figsize=(6, 5))
         
         # 计算累积发病率曲线：1 - 生存函数
         cumulative_incidence_curve = 1 - survival_function.y
@@ -125,6 +125,7 @@ if st.button("Predict CMM"):
 
 
 ## 打开终端win+R,再运行streamlit run "C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/prediction.py"##
+
 
 
 
