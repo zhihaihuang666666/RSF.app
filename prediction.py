@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 
 ## ===================== 加载模型 =====================##
 #加载模型
-model = joblib.load("C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/survrf_model.pkl")
+#model = joblib.load("C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/survrf_model.pkl")
+model = joblib.load("survrf_model.pkl")
 # 获取模型特征
 FEATURES = model.feature_names_in_
 
@@ -121,5 +122,6 @@ if st.button("Predict CMM"):
         
     except Exception as e:
         st.error(f"预测过程出错: {str(e)}")
+
 
 ## 打开终端win+R,再运行streamlit run "C:/Users/HZH/Desktop/生存机器学习模型/streamlit.app/RSF/prediction.py"##
